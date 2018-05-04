@@ -32,6 +32,7 @@ var debug = function(format, string) {
 var helpers = require('./lib/helpers');
 
 var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, callback) {
+  console.log('INSIDE SWAGGER');
   var args;
   var spec;
 
