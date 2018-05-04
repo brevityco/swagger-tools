@@ -26,8 +26,8 @@
 
 var _ = require('lodash');
 var cHelpers = require('../lib/helpers');
-var debug = function(string) {
-  console.log(string);
+var debug = function(args) {
+  console.log(arguments);
 };
 var fs = require('fs');
 var mHelpers = require('./helpers');
