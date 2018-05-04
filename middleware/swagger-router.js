@@ -382,6 +382,7 @@ exports = module.exports = function (options) {
   }
 
   return function swaggerRouter (req, res, next) {
+    console.log('RECEIVING REQUEST');
     var operation = req.swagger ? req.swagger.operation : undefined;
     var handler;
     var handlerName;
