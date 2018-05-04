@@ -25,7 +25,10 @@
 'use strict';
 
 var _ = require('lodash');
-var debug = require('debug')('swagger-tools:middleware');
+var util = require('util');
+var debug = function(format, string) {
+  console.log(util.format(format, string));
+};
 var helpers = require('./lib/helpers');
 
 var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, callback) {
@@ -82,6 +85,7 @@ var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, cal
         throw err;
       }
 
+      console.log('running callback');
       callback({
         // Create a wrapper to avoid having to pass the non-optional arguments back to the swaggerMetadata middleware
         swaggerMetadata: function () {
@@ -115,8 +119,14 @@ var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, cal
         // When running the swagger-tools test suite, we want to return an error instead of exiting the process.  This
         // does not mean that this function is an error-first callback but due to json-refs using Promises, we have to
         // return the error to avoid the error being swallowed.
+        console.error('Error initializing middleware');
+        console.error(err.stack);
+
         callback(err);
       } else {
+        console.error('Error initializing middleware');
+        console.error(err.stack);
+
         if (err.failedValidation === true) {
           helpers.printValidationResults(spec.version, rlOrSO, resources, results, true);
         } else {
