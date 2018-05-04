@@ -70,6 +70,7 @@ var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, cal
   }
 
   args.push(function (err, results) {
+    console.log('RUNNING CALLBACK STEP');
     if (results && results.errors.length + _.reduce(results.apiDeclarations || [], function (count, apiDeclaration) {
       return count += (apiDeclaration ? apiDeclaration.errors.length : 0);
     }, 0) > 0) {
@@ -140,6 +141,8 @@ var initializeMiddleware = function initializeMiddleware (rlOrSO, resources, cal
     }
   });
 
+  console.log('VALIDATING SPEC');
+  console.log(spec.validate);
   spec.validate.apply(spec, args);
 };
 
